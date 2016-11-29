@@ -77,8 +77,7 @@
             "properties": {
                 "element": {"#": "address"},
                 "label": "IPv4 Address",
-                "validator": {"@": "ipv4_address_validator"},
-                "errorMessage": "Invalid IP address"
+                "validator": {"@": "ipv4_address_validator"}
             },
             "bindings": {
                 "value": {"<->": "@owner.object._ipAddress.address"},
@@ -116,7 +115,6 @@
             "properties": {
                 "element": {"#": "v6address"},
                 "label": "IPv6 Address",
-                "errorMessage": "Invalid IPv6 address",
                 "converter": {"@": "v6addressConverter"}
             },
             "bindings": {
