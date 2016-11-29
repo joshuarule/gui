@@ -8,20 +8,17 @@ exports.EmailValidator = Validator.specialize({
         value: /^\b[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]*[a-zA-Z0-9]\.[a-zA-Z]{2,4}\b$/
     },
 
-    errorMessage: {
-        value: null
-    },
-
     _integerValidator: {
         value: null
     },
 
     validate: {
         value: function (value) {
+            var errorMessage = this.errorMessage || "Invalid email address";
             if (this.EMAIL_REGEX.test(value)) {
                 return true;
             } else {
-                throw new Error(this.errorMessage);
+                throw new Error(errorMessage);
             }
         }
     }

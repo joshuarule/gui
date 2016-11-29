@@ -14,8 +14,13 @@ var Ipv4Validator = exports.Ipv4Validator = Validator.specialize({
 
     validate: {
         value: function (address) {
-            return /^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$/.test(address);
+            // Fixme: needs a better default error message
+            var errorMessage = this.errorMessage || ("Invalid IPv4 address");
+            if (/^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$/.test(address)) {
+                return true;
+            } else {
+                throw new Error(errorMessage);
+            }
         }
     }
-
 });

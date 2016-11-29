@@ -7,7 +7,7 @@ var Validator = require("montage/core/converter/converter").Validator,
 
 /**
   * Verifies that a string is a valid ipv4 netmask or CIDR prefix
-  * 
+  *
   * @class Ipv4NetmaskValidator
   * @extends Validator
   */
@@ -33,6 +33,7 @@ var Ipv4NetmaskValidator = exports.Ipv4NetmaskValidator = Validator.specialize({
 
     validate: {
         value: function (netmask) {
+            var errorMessage = this.errorMessage || ("Invalid subnet mask");
             if (typeof netmask === 'string') {
                 if (this._ipv4AddressValidator.validate(netmask)) {
                     // Check if there's any `1` coming after `0`
@@ -41,7 +42,7 @@ var Ipv4NetmaskValidator = exports.Ipv4NetmaskValidator = Validator.specialize({
                 }
             }
 
-            throw new Error('Invalid subnet mask');
+            throw new Error(errorMessage);
         }
     }
 

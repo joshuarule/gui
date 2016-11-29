@@ -8,7 +8,7 @@ var Ipv6WithNetmaskValidator = require("core/converter/validator/ipv6-with-netma
 
 /**
   * Verifies that a string is a valid ipv6 address with a netmask separated by a slash
-  * 
+  *
   * @class Ipv4OrIpv6WithNetmaskValidator
   * @extends Validator
   */
@@ -23,6 +23,7 @@ exports.Ipv4OrIpv6WithNetmaskValidator = Validator.specialize({
 
     validate: {
         value: function (value) {
+            var errorMessage = this.errorMessage || ("Invalid subnet mask");
             if (value.indexOf(':') != -1 && this.v6validator.validate(value)) {
                 return true;
             }
@@ -30,7 +31,7 @@ exports.Ipv4OrIpv6WithNetmaskValidator = Validator.specialize({
                 return true;
             }
             else {
-                return false;
+                throw new Error(errorMessage);
             }
         }
     },

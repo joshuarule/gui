@@ -9,10 +9,6 @@ exports.IntegerFloorValidator = Validator.specialize({
         value: null
     },
 
-    errorMessage: {
-        value: null
-    },
-
     _integerValidator: {
         value: null
     },
@@ -25,15 +21,16 @@ exports.IntegerFloorValidator = Validator.specialize({
 
     validate: {
         value: function (value) {
+            var errorMessage = this.errorMessage || ("Value must be an integer higher than " + this.floor);
             try {
                 this._integerValidator.validate(value);
             } catch (e) {
-                throw new Error(this.errorMessage);
+                throw new Error(e.message);
             }
             if (+value >= this.floor) {
                 return true;
             } else {
-                throw new Error(this.errorMessage);
+                throw new Error(errorMessage);
             }
 
         }

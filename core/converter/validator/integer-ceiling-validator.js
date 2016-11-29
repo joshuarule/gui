@@ -9,10 +9,6 @@ exports.IntegerCeilingValidator = Validator.specialize({
         value: null
     },
 
-    errorMessage: {
-        value: null
-    },
-
     _integerValidator: {
         value: null
     },
@@ -25,15 +21,16 @@ exports.IntegerCeilingValidator = Validator.specialize({
 
     validate: {
         value: function (value) {
+            var errorMessage = this.errorMessage || ("Value must be an integer lower than " + this.ceiling);
             try {
                 this._integerValidator.validate(value);
             } catch (e) {
-                throw new Error(this.errorMessage);
+                throw new Error(errorMessage);
             }
             if (+value <= this.ceiling) {
                 return true;
             } else {
-                throw new Error(this.errorMessage);
+                throw new Error(errorMessage);
             }
 
         }

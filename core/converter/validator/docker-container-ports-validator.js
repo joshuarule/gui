@@ -6,10 +6,6 @@ var Validator = require("montage/core/converter/converter").Validator,
 
 exports.DockerContainerPortsValidator = Validator.specialize({
 
-    errorMessage: {
-        value: null
-    },
-
     _integerRangeValidator: {
         get: function () {
             if (!this.__integerRangeValidator) {
@@ -18,7 +14,7 @@ exports.DockerContainerPortsValidator = Validator.specialize({
                 this.__integerRangeValidator.ceiling = 65535;
                 this.__integerRangeValidator.errorMessage = "Port must be an integer between 0 and 65535";
             }
-            
+
             return this.__integerRangeValidator;
         }
     },
@@ -35,10 +31,12 @@ exports.DockerContainerPortsValidator = Validator.specialize({
 
     validate: {
         value: function (value) {
+            // need an appropriate default value
+            var errorMessage = this.errorMessage || ("Value did not pass validation");
             if (!this.isValidPortsString(value)) {
-                throw new Error(this.errorMessage);
+                throw new Error(errorMessage);
             }
-            
+
             var data = value.split(/:|\//),
                 port, containerPort, hostPort;
 

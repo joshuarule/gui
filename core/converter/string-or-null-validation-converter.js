@@ -12,12 +12,17 @@ exports.StringOrNullValidationConverter = Converter.specialize({
     },
     revert: {
         value: function(value) {
-            if (value === "") {
-                return null;
-            } else if (this.validator && typeof this.validator.validate === "function") {
-                this.validator.validate(value);
+            try {
+                if (value === "") {
+                    return null;
+                } else if (this.validator && typeof this.validator.validate === "function") {
+                    this.validator.validate(value);
+                }
+                return value;
             }
-            return value;
+            catch (e) {
+                throw new Error(e.message);
+            }
         }
     }
 });

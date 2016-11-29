@@ -45,11 +45,6 @@ exports.IntegerRangeValidator = Validator.specialize({
         }
     },
 
-    //FIXME: set a default message error
-    errorMessage: {
-        value: null
-    },
-
     constructor: {
         value: function() {
             this._integerFloorValidator = new IntegerFloorValidator();
@@ -59,6 +54,7 @@ exports.IntegerRangeValidator = Validator.specialize({
 
     validate: {
         value: function (value) {
+            var errorMessage = this.errorMessage || ("Value must be an integer between " + this.floor + " and " + this.ceiling + ".");
             try {
                 if (typeof this.floor === "number") {
                     this._integerFloorValidator.validate(value);
@@ -68,7 +64,7 @@ exports.IntegerRangeValidator = Validator.specialize({
                 }
                 return true;
             } catch (e) {
-                throw new Error(this.errorMessage);
+                throw new Error(errorMessage);
             }
         }
     }
