@@ -112,7 +112,7 @@ export class AccountsSectionService extends AbstractSectionService {
             self.accountRepository.getUserEmptyList(),
             self.accountRepository.getGroupEmptyList(),
             self.accountRepository.getAccountSystemEmptyList(),
-            self.accountRepository.getDirectoryServicesEmptyList()
+            self.accountRepository.getNewDirectoryServices()
         ]).spread(function (
             users: Array<any>,
             groups: Array<any>,
@@ -122,6 +122,7 @@ export class AccountsSectionService extends AbstractSectionService {
             (users as any)._order = 0;
             (groups as any)._order = 1;
             (system as any)._order = 2;
+            (directoryServices as any)._objectType = 'DirectoryServices';
             (directoryServices as any)._order = 3;
             let entries = [
                 users,
