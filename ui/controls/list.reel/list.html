@@ -16,7 +16,7 @@
                 "isSelectionEnabled": true
             },
             "bindings": {
-                "contentController": {"<-": "@owner.controller"}
+                "content": {"<-": "@owner.object"}
             }
         },
         "item": {
@@ -29,6 +29,17 @@
                 "object": {"<-": "@repetition:iteration.object"},
                 "showSubLabel": {"<-": "@owner.showSubLabel"}
             }
+        },
+
+        "loading": {
+            "prototype": "blue-shark/ui/text.reel",
+            "properties": {
+                "element": {"#": "loading"},
+                "value": "loading data..."
+            },
+            "bindings": {
+                "classList.has('hide')": {"<-": "!@owner.isLoadingData"}
+            }
         }
     }
     </script>
@@ -38,6 +49,7 @@
         <div data-montage-id="repetition">
             <div data-montage-id="item" class="List-item"></div>
         </div>
+        <div data-montage-id="loading"></div>
     </div>
 </body>
 </html>
