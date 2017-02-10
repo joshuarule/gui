@@ -13,20 +13,14 @@
                 "selectedObject": {"<->": "@services.selectedObject"}
             }
         },
-        "controller": {
-            "prototype": "montage/core/range-controller",
-            "properties": {
-                "sortPath": "config.type"
-            },
-            "bindings": {
-                "content": {"<-": "@owner.categoryServices"}
-            }
-        },
         "services": {
             "prototype": "ui/controls/list.reel",
             "properties": {
                 "element": {"#": "services"},
-                "controller": {"@": "controller"}
+                "sortPath": "config.type"
+            },
+            "bindings": {
+                "content": {"<-": "@owner.categoryServices"}
             }
         },
         "inspector": {
